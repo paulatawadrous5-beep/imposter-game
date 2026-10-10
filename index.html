@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#14101a">
+<title>المحتال 😈 | لعبة الكلمة السرية</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <!-- connection bar -->
+  <div id="connBar" class="conn hidden">⏳ بيصحّي السيرفر… استنى ثواني</div>
+
+  <!-- HOME -->
+  <section id="homeScreen" class="screen">
+    <div class="logo">😈</div>
+    <h1>المُحـتـال</h1>
+    <p class="tagline">مين فيكم المحتال؟ 👀</p>
+    <input id="nameInput" class="input" maxlength="14" placeholder="اكتب اسمك" autocomplete="off">
+    <div class="row-label">اعمل غرفة جديدة:</div>
+    <button id="create5Btn" class="btn btn-primary">➕ غرفة جديدة · جولة ٥ دقايق</button>
+    <button id="createInfBtn" class="btn btn-primary">➕ غرفة جديدة · بدون وقت</button>
+    <div class="row-label">أو ادخل بكود:</div>
+    <div class="join-row">
+      <input id="codeInput" class="input code" maxlength="4" placeholder="الكود" autocomplete="off" autocapitalize="characters">
+      <button id="joinBtn" class="btn btn-secondary">ادخل 🚪</button>
+    </div>
+    <p id="homeError" class="error"></p>
+    <p class="hint">٤ لاعبين · واحد محتال · كلمة سرية واحدة</p>
+  </section>
+
+  <!-- LOBBY -->
+  <section id="lobbyScreen" class="screen hidden">
+    <div class="row-label">كود الغرفة (ابعته لصحابك):</div>
+    <div id="roomCode" class="room-code" title="دوس للنسخ">----</div>
+    <div id="lobbySettings" class="muted"></div>
+    <div id="playerList" class="players"></div>
+    <div id="lobbyStatus" class="status"></div>
+    <button id="readyBtn" class="btn btn-primary">✅ أنا جاهز</button>
+    <button id="leaveBtn" class="btn btn-ghost">اخرج من الغرفة</button>
+  </section>
+
+  <!-- ROLE -->
+  <section id="roleScreen" class="screen hidden">
+    <div id="roleCard" class="role-card"></div>
+    <button id="roleOkBtn" class="btn btn-primary">تمام، فهمت 👍</button>
+  </section>
+
+  <!-- CLUE -->
+  <section id="clueScreen" class="screen hidden">
+    <div class="topbar">
+      <div id="clueTimer" class="timer"></div>
+      <div id="roundTimer" class="timer round"></div>
+    </div>
+    <div id="myWord" class="my-word"></div>
+    <div id="turnBanner" class="turn-banner"></div>
+    <div id="clueList" class="clues"></div>
+    <div id="clueForm" class="clue-form hidden">
+      <input id="clueInput" class="input" maxlength="40" placeholder="اكتب تلميح من كلمة واحدة…" autocomplete="off">
+      <button id="clueSendBtn" class="btn btn-primary">ابعت 📩</button>
+    </div>
+  </section>
+
+  <!-- VOTE -->
+  <section id="voteScreen" class="screen hidden">
+    <div class="topbar"><div id="voteTimer" class="timer"></div></div>
+    <h2>🗳️ صوّت: مين المحتال؟</h2>
+    <p class="muted">التصويت سري — محدش هيعرف اخترت مين</p>
+    <div id="candidateList" class="players"></div>
+    <div id="voteStatus" class="status"></div>
+  </section>
+
+  <!-- GUESS -->
+  <section id="guessScreen" class="screen hidden">
+    <div class="topbar"><div id="guessTimer" class="timer"></div></div>
+    <div id="guessBody"></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="resultScreen" class="screen hidden">
+    <div id="resultBanner" class="result-banner"></div>
+    <div id="resultDetails" class="result-details"></div>
+    <button id="againBtn" class="btn btn-primary">🔄 العب تاني</button>
+    <button id="resultLeaveBtn" class="btn btn-ghost">اخرج من الغرفة</button>
+  </section>
+
+  <div id="toast" class="toast hidden"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
