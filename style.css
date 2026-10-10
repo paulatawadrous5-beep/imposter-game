@@ -1,0 +1,130 @@
+/* Imposter game — mobile-first, RTL Arabic */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+:root {
+  --bg: #14101a; --card: #1f1830; --card2: #2a2140;
+  --red: #ff3b5c; --red-d: #c22744; --gold: #ffd23f;
+  --txt: #f4f1ff; --muted: #9a93b8; --green: #35d07f;
+}
+html, body { margin: 0; padding: 0; }
+body {
+  background: radial-gradient(120% 90% at 50% 0%, #241a3a 0%, var(--bg) 60%);
+  color: var(--txt);
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+  min-height: 100vh; min-height: 100dvh;
+}
+#app { max-width: 480px; margin: 0 auto; padding: 18px 16px 40px; }
+.screen { display: flex; flex-direction: column; gap: 12px; animation: fade .25s ease; }
+.hidden { display: none !important; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+
+h1 { font-size: 42px; margin: 0; text-align: center; letter-spacing: 2px; }
+h2 { font-size: 22px; margin: 4px 0; text-align: center; }
+.logo { font-size: 72px; text-align: center; filter: drop-shadow(0 0 18px rgba(255,59,92,.5)); }
+.tagline { text-align: center; color: var(--muted); margin: 0 0 6px; }
+.row-label { color: var(--muted); font-size: 14px; margin-top: 6px; }
+.hint { text-align: center; color: var(--muted); font-size: 13px; }
+.muted { color: var(--muted); font-size: 14px; text-align: center; }
+.error { color: var(--red); text-align: center; min-height: 20px; font-size: 14px; }
+.status { text-align: center; color: var(--gold); font-size: 15px; min-height: 22px; }
+
+.input {
+  width: 100%; padding: 14px; font-size: 17px; border-radius: 14px;
+  border: 1px solid #3a2f5c; background: var(--card); color: var(--txt);
+  text-align: center; font-family: inherit;
+}
+.input:focus { outline: none; border-color: var(--red); }
+.input.code { letter-spacing: 8px; font-weight: 800; text-transform: uppercase; }
+
+.btn {
+  border: none; border-radius: 16px; padding: 15px; font-size: 17px; font-weight: 800;
+  cursor: pointer; font-family: inherit; color: #fff; width: 100%;
+  transition: transform .08s;
+}
+.btn:active { transform: scale(.97); }
+.btn:disabled { opacity: .45; }
+.btn-primary { background: linear-gradient(180deg, var(--red), var(--red-d)); box-shadow: 0 4px 0 #8f1a30; }
+.btn-secondary { background: var(--card2); border: 1px solid #4a3d75; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid #3a2f5c; }
+
+.join-row { display: flex; gap: 10px; }
+.join-row .input { flex: 1; }
+.join-row .btn { width: auto; padding: 14px 22px; }
+
+.room-code {
+  font-size: 44px; font-weight: 900; letter-spacing: 12px; text-align: center;
+  background: var(--card); border: 2px dashed var(--gold); border-radius: 18px;
+  padding: 14px; cursor: pointer; user-select: none; direction: ltr;
+}
+.players { display: flex; flex-direction: column; gap: 8px; }
+.player {
+  display: flex; align-items: center; gap: 10px; background: var(--card);
+  border-radius: 14px; padding: 12px 14px; font-size: 17px;
+  border: 1px solid transparent;
+}
+.player .dot { width: 12px; height: 12px; border-radius: 50%; background: #555; flex-shrink: 0; }
+.player.online .dot { background: var(--green); }
+.player .nm { flex: 1; }
+.player .st { font-size: 13px; color: var(--muted); }
+.player.ready { border-color: rgba(53,208,127,.5); }
+.player.ready .st { color: var(--green); }
+.player.me { border-color: rgba(255,59,92,.5); }
+.player.off { opacity: .5; }
+.player.candidate { cursor: pointer; }
+.player.candidate:active { transform: scale(.98); }
+.player.picked { border-color: var(--red); background: #33203a; }
+
+.role-card {
+  background: var(--card); border-radius: 20px; padding: 34px 20px; text-align: center;
+  border: 2px solid var(--gold);
+}
+.role-card.imposter { border-color: var(--red); }
+.role-word { font-size: 40px; font-weight: 900; color: var(--gold); margin: 12px 0; }
+.role-big { font-size: 64px; }
+.role-sub { color: var(--muted); font-size: 15px; line-height: 1.8; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; }
+.timer {
+  background: var(--card); border-radius: 999px; padding: 8px 16px;
+  font-weight: 800; font-size: 16px; direction: ltr;
+}
+.timer.low { color: var(--red); animation: blink 1s infinite; }
+.timer.round { color: var(--gold); }
+@keyframes blink { 50% { opacity: .4; } }
+
+.my-word {
+  text-align: center; background: rgba(255,210,63,.1); border: 1px solid rgba(255,210,63,.4);
+  border-radius: 12px; padding: 10px; font-size: 18px; font-weight: 800; color: var(--gold);
+}
+.my-word.imposter { color: var(--red); border-color: rgba(255,59,92,.4); background: rgba(255,59,92,.08); }
+.turn-banner {
+  text-align: center; font-size: 16px; background: var(--card2); border-radius: 12px; padding: 10px;
+}
+.turn-banner.me { border: 1px solid var(--red); color: #fff; }
+.clues { display: flex; flex-direction: column; gap: 8px; min-height: 120px; }
+.clue {
+  background: var(--card); border-radius: 12px; padding: 10px 14px; font-size: 16px;
+  display: flex; gap: 8px; align-items: baseline; animation: fade .3s ease;
+}
+.clue .who { color: var(--gold); font-weight: 800; font-size: 14px; white-space: nowrap; }
+.clue-form { display: flex; gap: 8px; position: sticky; bottom: 12px; }
+.clue-form .input { text-align: right; }
+.clue-form .btn { width: auto; padding: 14px 20px; white-space: nowrap; }
+
+.result-banner {
+  text-align: center; font-size: 30px; font-weight: 900; padding: 26px 16px;
+  border-radius: 20px; line-height: 1.6;
+}
+.result-banner.crew { background: rgba(53,208,127,.12); border: 2px solid var(--green); }
+.result-banner.imposter { background: rgba(255,59,92,.12); border: 2px solid var(--red); }
+.result-details { background: var(--card); border-radius: 16px; padding: 16px; font-size: 15px; line-height: 2; }
+.vote-row { display: flex; justify-content: space-between; border-bottom: 1px solid #2c2447; padding: 4px 0; }
+
+.conn {
+  position: sticky; top: 0; z-index: 50; text-align: center; background: #3a2c10;
+  color: var(--gold); padding: 10px; border-radius: 12px; margin-bottom: 10px; font-size: 14px;
+}
+.toast {
+  position: fixed; bottom: 24px; right: 50%; transform: translateX(50%);
+  background: #000d; color: #fff; padding: 12px 22px; border-radius: 999px;
+  font-size: 15px; z-index: 99; max-width: 90vw; text-align: center;
+}
