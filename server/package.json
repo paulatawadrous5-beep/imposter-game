@@ -1,0 +1,1 @@
+{"dependencies":{"express":"^4.22.3","socket.io":"^4.8.4","socket.io-client":"^4.8.4"},"description":"Real-time 4-player Imposter word game server (Socket.IO)","engines":{"node":">=18"},"main":"server.js","name":"imposter-game-server","scripts":{"start":"node server.js","test-timers":"FAST_TIMERS=1 node server.js"},"version":"1.0.0"}
