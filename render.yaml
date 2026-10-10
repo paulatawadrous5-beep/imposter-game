@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: imposter-game-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    healthCheckPath: /health
